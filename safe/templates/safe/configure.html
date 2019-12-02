@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Safe Home|Configure
+{% endblock %}
+
+{% block nav_home_active %}
+    active
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Configure</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{%  url 'configure' %}" method="POST">
+                            {% if message %}
+                                <div class="alert alert-warning text-center">{{ message }}</div>
+                            {% endif %}
+                            {% csrf_token %}
+                            {{ control_panel_form.as_p }}
+                            <button type="reset" class="btn btn-default pull-left">Reset</button>
+                            <input type="submit" value="Update" class="btn btn-primary pull-right" >
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
