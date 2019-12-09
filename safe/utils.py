@@ -10,7 +10,7 @@ def send_email(subject, message):
 
     try:
         my_sender = '1158677160@qq.com'  # 邮件发送者
-        my_pass = 'Lly19980726.'  # 邮件发送者邮箱密码
+        my_pass = ''  # 邮件发送者邮箱密码
         my_user = '13777893886@163.com'
         msg = MIMEText(message, 'html', 'utf-8')
         msg['From'] = formataddr(["From Safe Home", my_sender])
@@ -30,7 +30,7 @@ def send_html_email(subject, message, image):
 
     try:
         my_sender = '1158677160@qq.com'  # 邮件发送者
-        my_pass = 'Lly19980726.'  # 邮件发送者邮箱密码
+        my_pass = ''  # 邮件发送者邮箱密码
         my_user = '13777893886@163.com'
 
         msgRoot = MIMEMultipart('related')
