@@ -29,7 +29,8 @@
                         <a href="{% url 'home' %}">Home</a>
                     </li>
                  {% if request.session.is_login %}
-                     <li><a href="{% url 'configure' %}">Configure</a></li>
+                     <li class="{% block nav_configure_active %}{% endblock %}"><a href="{% url 'configure' %}">Configure</a></li>
+                     <li class="{% block nav_camera_active %}{% endblock %}"><a href="{% url 'camera' %}">Camera</a></li>
                      <li><a href="#">Current user:{{ request.session.username }} </a></li>
                      <li><a href="{% url 'logout' %}">Logout</a></li>
                  {% else %}

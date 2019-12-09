@@ -23,5 +23,6 @@ urlpatterns = [
     path('safe/', include('safe.urls')),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
-    path('captcha', include('captcha.urls'))
+    path('captcha', include('captcha.urls')),
+    # path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]

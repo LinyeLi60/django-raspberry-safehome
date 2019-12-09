@@ -25,7 +25,7 @@ SECRET_KEY = 'h!cvv)xs46s#mb_=$c-b&hj+(zuppjn26p@1^lxaj7nr79-a#x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'captcha',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
+)
 

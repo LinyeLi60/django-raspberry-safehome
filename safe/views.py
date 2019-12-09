@@ -1,7 +1,14 @@
 # coding=utf-8
 from django.shortcuts import HttpResponse, render
+from django.http import StreamingHttpResponse
 from safehome.forms import ControlPanelForm
 from .models import UserExtension
+
+from django.views.decorators.gzip import gzip_page
+from .camera import VideoCamera
+from safehome.forms import LoginForm
+
+cam = VideoCamera()
 
 
 # Create your views here.
@@ -42,3 +49,23 @@ def configure(request):
                                                        'delay': user_extension.dialing_delay})
 
     return render(request, 'safe/configure.html', locals())
+
+
+def gen(camera):
+    while True:
+        frame = cam.get_frame()
+        yield(b'--frame\r\n'
+              b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+@gzip_page
+def camera(request):
+    if 'is_login' in request.session and request.session['is_login']:
+        try:
+            return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+        except Exception as e:    # This is bad! replace it with proper handling
+            print("相机画面获取错误:", e)
+    else:
+        login_form = LoginForm()
+        message = 'Please login first!'
+        return render(request, 'login.html', locals())
